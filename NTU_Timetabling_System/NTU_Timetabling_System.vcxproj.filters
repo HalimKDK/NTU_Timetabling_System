@@ -21,9 +21,15 @@
     <ClCompile Include="SRC\User.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SRC\Admin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SRC\User.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SRC\Admin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

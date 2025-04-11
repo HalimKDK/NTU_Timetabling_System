@@ -128,9 +128,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="NTU_Timetabling_System.cpp" />
+    <ClCompile Include="SRC\Admin.cpp" />
     <ClCompile Include="SRC\User.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="SRC\Admin.h" />
     <ClInclude Include="SRC\User.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
