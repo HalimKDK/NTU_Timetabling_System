@@ -129,12 +129,14 @@
   <ItemGroup>
     <ClCompile Include="NTU_Timetabling_System.cpp" />
     <ClCompile Include="SRC\Admin.cpp" />
+    <ClCompile Include="SRC\Group.cpp" />
     <ClCompile Include="SRC\Module.cpp" />
     <ClCompile Include="SRC\Student.cpp" />
     <ClCompile Include="SRC\User.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SRC\Admin.h" />
+    <ClInclude Include="SRC\Group.h" />
     <ClInclude Include="SRC\Module.h" />
     <ClInclude Include="SRC\Student.h" />
     <ClInclude Include="SRC\User.h" />
