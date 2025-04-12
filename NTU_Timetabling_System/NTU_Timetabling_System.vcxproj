@@ -130,6 +130,7 @@
     <ClCompile Include="NTU_Timetabling_System.cpp" />
     <ClCompile Include="SRC\Admin.cpp" />
     <ClCompile Include="SRC\Group.cpp" />
+    <ClCompile Include="SRC\Lecturer.cpp" />
     <ClCompile Include="SRC\Module.cpp" />
     <ClCompile Include="SRC\Person.cpp" />
     <ClCompile Include="SRC\SessionType.cpp" />
@@ -139,6 +140,7 @@
   <ItemGroup>
     <ClInclude Include="SRC\Admin.h" />
     <ClInclude Include="SRC\Group.h" />
+    <ClInclude Include="SRC\Lecturer.h" />
     <ClInclude Include="SRC\Module.h" />
     <ClInclude Include="SRC\Person.h" />
     <ClInclude Include="SRC\SessionType.h" />
