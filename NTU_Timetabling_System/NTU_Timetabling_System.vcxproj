@@ -131,6 +131,7 @@
     <ClCompile Include="SRC\Admin.cpp" />
     <ClCompile Include="SRC\Group.cpp" />
     <ClCompile Include="SRC\Module.cpp" />
+    <ClCompile Include="SRC\Person.cpp" />
     <ClCompile Include="SRC\SessionType.cpp" />
     <ClCompile Include="SRC\Student.cpp" />
     <ClCompile Include="SRC\User.cpp" />
@@ -139,6 +140,7 @@
     <ClInclude Include="SRC\Admin.h" />
     <ClInclude Include="SRC\Group.h" />
     <ClInclude Include="SRC\Module.h" />
+    <ClInclude Include="SRC\Person.h" />
     <ClInclude Include="SRC\SessionType.h" />
     <ClInclude Include="SRC\Student.h" />
     <ClInclude Include="SRC\User.h" />
