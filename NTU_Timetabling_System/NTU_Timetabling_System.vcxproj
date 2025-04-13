@@ -138,6 +138,7 @@
     <ClCompile Include="SRC\SessionType.cpp" />
     <ClCompile Include="SRC\Student.cpp" />
     <ClCompile Include="SRC\TimeSlot.cpp" />
+    <ClCompile Include="SRC\Timetable.cpp" />
     <ClCompile Include="SRC\User.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +152,7 @@
     <ClInclude Include="SRC\SessionType.h" />
     <ClInclude Include="SRC\Student.h" />
     <ClInclude Include="SRC\TimeSlot.h" />
+    <ClInclude Include="SRC\Timetable.h" />
     <ClInclude Include="SRC\User.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
