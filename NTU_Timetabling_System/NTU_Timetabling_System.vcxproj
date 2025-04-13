@@ -142,6 +142,7 @@
     <ClCompile Include="SRC\Timetable.cpp" />
     <ClCompile Include="SRC\TimetableManager.cpp" />
     <ClCompile Include="SRC\User.cpp" />
+    <ClCompile Include="SRC\UserInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SRC\Admin.h" />
@@ -158,6 +159,7 @@
     <ClInclude Include="SRC\Timetable.h" />
     <ClInclude Include="SRC\TimetableManager.h" />
     <ClInclude Include="SRC\User.h" />
+    <ClInclude Include="SRC\UserInterface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
