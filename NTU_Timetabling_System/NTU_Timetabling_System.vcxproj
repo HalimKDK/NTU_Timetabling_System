@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="NTU_Timetabling_System.cpp" />
     <ClCompile Include="SRC\Admin.cpp" />
+    <ClCompile Include="SRC\CSV_Exporter.cpp" />
     <ClCompile Include="SRC\FileManager.cpp" />
     <ClCompile Include="SRC\Group.cpp" />
     <ClCompile Include="SRC\Lecturer.cpp" />
@@ -147,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SRC\Admin.h" />
+    <ClInclude Include="SRC\CSV_Exporter.h" />
     <ClInclude Include="SRC\FileManager.h" />
     <ClInclude Include="SRC\Group.h" />
     <ClInclude Include="SRC\Lecturer.h" />
