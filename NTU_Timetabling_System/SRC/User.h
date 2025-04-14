@@ -2,26 +2,32 @@
  * This file contains the declaration of the User class which serves
  * as a base class for all user types (Admin and Student)
  */
-
 #ifndef USER_H
 #define USER_H
-
 #include <string>
 #include <memory>
 
-// The User class is a base class for all types of users in the system,
-// like Admins and Students. It defines the shared behavior and properties.
+ // The User class is a base class for all types of users in the system,
+ // like Admins and Students. It defines the shared behavior and properties.
 class User {
 public:
-
     // Types of users in the system.
     enum class UserType {
         ADMIN,
         STUDENT
     };
 
+    // Default constructor for STL compatibility
+    User() : m_username(""), m_password(""), m_userType(UserType::STUDENT) {}
+
     // Creates a new user with a username, password, and user type.
     User(const std::string& username, const std::string& password, UserType type);
+
+    // Copy and move operations
+    User(const User&) = default;
+    User(User&&) = default;
+    User& operator=(const User&) = default;
+    User& operator=(User&&) = default;
 
     // Virtual destructor to ensure proper cleanup in derived classes.
     virtual ~User();

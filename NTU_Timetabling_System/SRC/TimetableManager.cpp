@@ -17,6 +17,7 @@
 #include "Timetable.h"
 #include "User.h"
 #include "FileManager.h"
+#include "TimeSlot.h"
 #include <algorithm>
 #include <stdexcept>
 #include <chrono>
@@ -147,9 +148,9 @@ bool TimetableManager::removeModule(int index) {
     m_moduleMap.erase(code);
 
     // Update remaining indices in map
-    for (auto& [moduleCode, moduleIndex] : m_moduleMap) {
-        if (moduleIndex > static_cast<size_t>(index)) {
-            moduleIndex--;
+    for (auto it = m_moduleMap.begin(); it != m_moduleMap.end(); ++it) {
+        if (it->second > static_cast<size_t>(index)) {
+            it->second--;
         }
     }
 
@@ -209,9 +210,9 @@ bool TimetableManager::removeGroup(int index) {
     m_groupMap.erase(code);
 
     // Update remaining indices in map
-    for (auto& [groupCode, groupIndex] : m_groupMap) {
-        if (groupIndex > static_cast<size_t>(index)) {
-            groupIndex--;
+    for (auto it = m_groupMap.begin(); it != m_groupMap.end(); ++it) {
+        if (it->second > static_cast<size_t>(index)) {
+            it->second--;
         }
     }
 
@@ -271,9 +272,9 @@ bool TimetableManager::removeSessionType(int index) {
     m_sessionTypeMap.erase(code);
 
     // Update remaining indices in map
-    for (auto& [sessionTypeCode, sessionTypeIndex] : m_sessionTypeMap) {
-        if (sessionTypeIndex > static_cast<size_t>(index)) {
-            sessionTypeIndex--;
+    for (auto it = m_sessionTypeMap.begin(); it != m_sessionTypeMap.end(); ++it) {
+        if (it->second > static_cast<size_t>(index)) {
+            it->second--;
         }
     }
 
@@ -333,9 +334,9 @@ bool TimetableManager::removeRoom(int index) {
     m_roomMap.erase(number);
 
     // Update remaining indices in map
-    for (auto& [roomNumber, roomIndex] : m_roomMap) {
-        if (roomIndex > static_cast<size_t>(index)) {
-            roomIndex--;
+    for (auto it = m_roomMap.begin(); it != m_roomMap.end(); ++it) {
+        if (it->second > static_cast<size_t>(index)) {
+            it->second--;
         }
     }
 

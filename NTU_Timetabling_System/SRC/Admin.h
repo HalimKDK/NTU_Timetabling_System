@@ -8,14 +8,15 @@
  * The class also handles user interaction through menu interfaces
  * specific to administrative tasks.
  */
-
 #ifndef ADMIN_H
 #define ADMIN_H
 
 #include "User.h"
 #include "UserInterface.h"
+#include "Room.h"
 #include <vector>
 #include <memory>
+#include <string>
 
  // Forward declarations to avoid circular dependencies
 class Module;
@@ -24,6 +25,7 @@ class SessionType;
 class Room;
 class Session;
 class Timetable;
+class TimeSlot;
 
 /**
  * The Admin class provides functionality for managing the entire
@@ -31,8 +33,7 @@ class Timetable;
  */
 class Admin : public User, public UserInterface {
 public:
-
-    // Forward declarations to avoid circular dependencies
+    // Constructor
     Admin(const std::string& username, const std::string& password);
 
     // Cleans up the admin object (if needed)
@@ -90,42 +91,37 @@ public:
     void updateTimetableEntry();
     void deleteTimetableEntry();
     void findTimetableConflicts(); // This is an advanced feature to identify scheduling conflicts like double-booked rooms or lecturers.
-   
-    
+
 private:
     // Helper functions for interface navigation
     void displayModuleMenu() const;
     bool processModuleMenuChoice(int choice); // this function returns true If processing should continue
-                                              // or it returns false If the admin wants to go back to the main menu
+    // or it returns false If the admin wants to go back to the main menu
     void displayGroupMenu() const; // Displays group management menu options
     bool processGroupMenuChoice(int choice);
-
     void displaySessionTypeMenu() const;
     bool processSessionTypeMenuChoice(int choice);
-
     void displayStudentMenu() const;
     bool processStudentMenuChoice(int choice);
-
     void displayLecturerMenu() const;
     bool processLecturerMenuChoice(int choice);
-
     void displayRoomMenu() const;
     bool processRoomMenuChoice(int choice);
-
     void displayTimetableMenu() const;
     bool processTimetableMenuChoice(int choice);
 
-
     // Selection helpers
-
     // Returns the selected module index or -1 if the user cancels
     int getModuleSelection() const;
-
     int getGroupSelection() const;
     int getSessionTypeSelection() const;
     int getRoomSelection() const;
     int getStudentSelection() const;
     int getLecturerSelection() const;
+
+    // Helper functions to convert between string and enum
+    Room::RoomType stringToRoomType(const std::string& typeStr) const;
+    std::string roomTypeToString(Room::RoomType type) const;
 };
 
 #endif // ADMIN_H

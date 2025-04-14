@@ -1,9 +1,10 @@
 /**
- *
- * This file defines the Student class. A student can log into the system,
- * check their weekly timetable, search for sessions, and even export their
- * schedule as a CSV file.
- */
+  * Student.h
+  * Student user class for the timetabling system
+  *
+  * This file contains the declaration of the Student class which
+  * represents student users who can view and search timetables.
+  */
 
 #ifndef STUDENT_H
 #define STUDENT_H
@@ -15,74 +16,180 @@
 #include <vector>
 #include <memory>
 
- // Forward declarations to avoid unnecessary includes
+  // Forward declarations
 class Group;
 class Timetable;
 class Session;
 
 /**
- * Student represents a user who can log in and access their academic schedule.
- * They can view their timetable, search it by different filters, and export it.
+ * Student
+ * Student user with timetable viewing capabilities
+ *
+ * The Student class represents a student user who can view and
+ * search their timetable based on various criteria.
  */
 class Student : public User, public Person, public UserInterface {
 public:
-    // Creates a student with full profile information (useful when loading from a database or form)
-    Student(const std::string& username, const std::string& password,
-        const std::string& firstName = "", const std::string& lastName = "",
-        const std::string& studentId = "");
+    /**
+     * Default constructor for STL compatibility
+     */
+    Student() : User(), Person(), UserInterface(), m_studentId(""), m_assignedGroup(nullptr) {}
 
-    // A simpler constructor for when you just have a username and password
+    /**
+     * Construct a new Student object with minimal information
+     *
+     * username Student username
+     * password Student password
+     */
     Student(const std::string& username, const std::string& password);
 
-    // Clean up resources when a student object is destroyed
+    /**
+     * Construct a new Student object with full details
+     *
+     * username Student username
+     * password Student password
+     * firstName Student's first name
+     * lastName Student's last name
+     * studentId Student's ID number
+     */
+    Student(const std::string& username, const std::string& password,
+        const std::string& firstName, const std::string& lastName,
+        const std::string& studentId);
+
+    /**
+     * Explicitly declare copy/move constructors and assignment operators
+     */
+    Student(const Student&) = default;
+    Student(Student&&) = default;
+    Student& operator=(const Student&) = default;
+    Student& operator=(Student&&) = default;
+
+    /**
+     * Destroy the Student object
+     */
     virtual ~Student();
 
-    // Shows the main student interface menu (overrides the base class version)
+    /**
+     * Display the student menu
+     *
+     * Implementation of the pure virtual function from User
+     */
     void displayMenu() const override;
 
-    // Displays the actual menu options specific to students
+    /**
+     * Display the main menu
+     *
+     * Implementation of the pure virtual function from UserInterface
+     */
     void displayMainMenu() const override;
 
-    // Handles the user's menu selection and performs the appropriate action
+    /**
+     * Process a menu choice
+     *
+     * Implementation of the pure virtual function from UserInterface
+     *
+     * choice User's menu choice
+     * return true If processing should continue
+     * return false If the user wants to exit
+     */
     bool processMenuChoice(int choice) override;
 
-    // Runs the student interface loop – keeps going until the user logs out
+    /**
+     * Run the student interface
+     *
+     * Main function to execute the student user interface and handle
+     * user input for viewing timetables.
+     *
+     * return true If the student logs out normally
+     * return false If there was an error or forced exit
+     */
     bool run() override;
 
-    // Returns the student's ID number
+    /**
+     * Get the student's ID
+     *
+     * return The student ID
+     */
     const std::string& getStudentId() const;
 
-    // Updates the student's ID number
+    /**
+     * Set the student's ID
+     *
+     * studentId The new student ID
+     */
     void setStudentId(const std::string& studentId);
 
-    // Returns the group the student is assigned to, if any
+    /**
+     * Get the student's password
+     *
+     * return The password
+     */
+    const std::string& getPassword() const;
+
+    /**
+     * Get the student's assigned group
+     *
+     * return Pointer to the assigned group, or nullptr if not assigned
+     */
     Group* getAssignedGroup();
 
-    // Assigns the student to a group
+    /**
+     * Set the student's assigned group
+     *
+     * group Pointer to the group to assign
+     */
     void setAssignedGroup(Group* group);
 
-    // Displays the student's timetable for a specific week (week number between 1 and 53)
+    /**
+     * View the student's timetable for a specific week
+     *
+     * weekNumber The week number to view (1-53)
+     */
     void viewTimetable(int weekNumber);
 
-    // Lets the student search their timetable using filters like module, room, or lecturer
+    /**
+     * Search the timetable by various criteria
+     *
+     * Advanced feature to search timetable by module, room, lecturer, etc.
+     */
     void searchTimetable();
 
-    // Exports the timetable to a CSV file, useful for printing or sharing
+    /**
+     * Export the timetable to a CSV file
+     *
+     * Advanced feature to export the timetable to a CSV file.
+     *
+     * weekNumber The week number to export
+     * filename The filename to export to
+     * return true If export was successful
+     * return false If there was an error
+     */
     bool exportTimetable(int weekNumber, const std::string& filename);
 
 private:
-    std::string m_studentId;      // Student's unique ID
-    Group* m_assignedGroup;       // Pointer to the group the student belongs to
+    std::string m_studentId;  // Student's ID number
+    Group* m_assignedGroup;   // Pointer to the assigned group
 
-    // Shows the search filter options (like by room, lecturer, etc.)
+    /**
+     * Display search options menu
+     */
     void displaySearchMenu() const;
 
-    // Handles the user's search selection
+    /**
+     * Process search menu selection
+     *
+     * choice User's menu choice
+     * return true If processing should continue
+     * return false If the student wants to go back to main menu
+     */
     bool processSearchMenuChoice(int choice);
 
-    // Helper to show all the sessions in a week
+    /**
+     * Display the sessions for a specific week
+     *
+     * sessions Vector of sessions to display
+     */
     void displaySessions(const std::vector<std::shared_ptr<Session>>& sessions) const;
 };
 
 #endif // STUDENT_H
-

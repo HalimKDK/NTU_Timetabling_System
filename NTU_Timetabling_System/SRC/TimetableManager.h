@@ -23,6 +23,8 @@ class Student;
 class Lecturer;
 class Session;
 class Timetable;
+class User;
+class TimeSlot;
 
 // Main manager for the timetabling system, designed as a singleton
 class TimetableManager {
@@ -118,6 +120,9 @@ public:
     // Authenticates a user with their username and password, returns the user if valid
     std::shared_ptr<User> authenticateUser(const std::string& username, const std::string& password) const;
 
+    // Generate a unique session ID
+    std::string generateSessionId() const;
+
 private:
     // Private constructor and destructor for singleton pattern
     TimetableManager();
@@ -143,6 +148,7 @@ private:
     std::map<std::string, std::shared_ptr<Student>> m_studentMap;
     std::map<std::string, std::shared_ptr<Student>> m_studentUsernameMap;
     std::map<std::string, std::shared_ptr<Lecturer>> m_lecturerMap;
+    std::map<std::string, std::shared_ptr<User>> m_userMap;
 };
 
 #endif // TIMETABLE_MANAGER_H

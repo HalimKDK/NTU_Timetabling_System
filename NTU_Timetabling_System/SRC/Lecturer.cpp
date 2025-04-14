@@ -4,7 +4,6 @@
  * have a title, belong to a department, and be assigned to modules
  * and sessions within the timetabling system.
  */
-
 #include "Lecturer.h"
 #include "Module.h"
 #include "Session.h"
@@ -14,6 +13,18 @@
 Lecturer::Lecturer(const std::string& firstName, const std::string& lastName,
     const std::string& id, const std::string& title,
     const std::string& department)
+    : Person(firstName, lastName, id),
+    m_title(title),
+    m_department(department) {
+    // Nothing else to initialize
+}
+
+// Special constructor for STL operations with 7 string arguments
+// This constructor ignores the extra parameters but allows the STL to create Lecturer objects
+Lecturer::Lecturer(const std::string& firstName, const std::string& lastName,
+    const std::string& id, const std::string& title,
+    const std::string& department, const std::string& /* extra1 */,
+    const std::string& /* extra2 */)
     : Person(firstName, lastName, id),
     m_title(title),
     m_department(department) {
@@ -66,7 +77,6 @@ bool Lecturer::removeModule(const std::string& moduleCode) {
         [&moduleCode](const std::shared_ptr<Module>& module) {
             return module->getCode() == moduleCode;
         });
-
     if (it != m_modules.end()) {
         m_modules.erase(it);
         return true;
@@ -100,7 +110,6 @@ bool Lecturer::removeSession(const std::string& sessionId) {
         [&sessionId](const std::shared_ptr<Session>& session) {
             return session->getId() == sessionId;
         });
-
     if (it != m_sessions.end()) {
         m_sessions.erase(it);
         return true;

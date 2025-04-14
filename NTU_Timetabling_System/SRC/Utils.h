@@ -10,7 +10,9 @@
 #define UTILS_H
 
 #include <string>
+#include <vector>
 #include "TimeSlot.h"
+
 
  /**
   * A namespace containing various helper functions for the system.

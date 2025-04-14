@@ -5,10 +5,8 @@
  * that defines a common interface for different user interface types
  * in the timetabling system — specifically for Admin and Student interfaces.
  */
-
 #ifndef USER_INTERFACE_H
 #define USER_INTERFACE_H
-
 #include <string>
 
  /**
@@ -21,6 +19,14 @@ public:
      * Creates a new UserInterface object.
      */
     UserInterface();
+
+    /**
+     * Copy and move operations
+     */
+    UserInterface(const UserInterface&) = default;
+    UserInterface(UserInterface&&) = default;
+    UserInterface& operator=(const UserInterface&) = default;
+    UserInterface& operator=(UserInterface&&) = default;
 
     /**
      * Destroys the UserInterface object.
@@ -50,7 +56,7 @@ public:
      * Runs the user interface loop.
      *
      * Starts the interface and keeps it running until the user exits.
-     * Returns true if everything completes successfully, or false if there’s an error.
+     * Returns true if everything completes successfully, or false if there's an error.
      */
     virtual bool run() = 0;
 
@@ -94,5 +100,4 @@ public:
      */
     void clearScreen() const;
 };
-
 #endif // USER_INTERFACE_H

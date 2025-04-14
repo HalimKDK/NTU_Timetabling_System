@@ -5,10 +5,8 @@
  * manages their basic details like name, title, department, and the
  * modules/sessions they are responsible for.
  */
-
 #ifndef LECTURER_H
 #define LECTURER_H
-
 #include "Person.h"
 #include <string>
 #include <vector>
@@ -25,10 +23,25 @@ class Session;
  */
 class Lecturer : public Person {
 public:
+    // Default constructor for STL compatibility
+    Lecturer() : Person(), m_title(""), m_department("") {}
+
     // Creates a new Lecturer with a name, ID, optional title, and department
     Lecturer(const std::string& firstName, const std::string& lastName,
         const std::string& id, const std::string& title = "",
         const std::string& department = "");
+
+    // Constructor specifically for STL operations with 7 string arguments
+    Lecturer(const std::string& firstName, const std::string& lastName,
+        const std::string& id, const std::string& title,
+        const std::string& department, const std::string& extra1,
+        const std::string& extra2);
+
+    // Explicitly declare copy/move constructors and assignment operators
+    Lecturer(const Lecturer&) = default;
+    Lecturer(Lecturer&&) = default;
+    Lecturer& operator=(const Lecturer&) = default;
+    Lecturer& operator=(Lecturer&&) = default;
 
     // Virtual destructor
     virtual ~Lecturer();
@@ -75,10 +88,8 @@ public:
 private:
     std::string m_title;      // Lecturer's title (like "Dr", "Prof")
     std::string m_department; // Lecturer's department
-
     std::vector<std::shared_ptr<Module>> m_modules;   // Modules taught by this lecturer
     std::vector<std::shared_ptr<Session>> m_sessions; // Sessions taught by this lecturer
 };
 
 #endif // LECTURER_H
-

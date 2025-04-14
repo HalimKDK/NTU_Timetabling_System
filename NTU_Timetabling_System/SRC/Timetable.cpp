@@ -5,8 +5,13 @@
  * in a collection of academic sessions, organized by week.
  */
 
+
 #include "Timetable.h"
 #include "Session.h"
+#include "Module.h"  
+#include "Room.h"
+#include "Lecturer.h"   
+#include "Group.h"
 #include <algorithm>
 #include <iomanip>
 
@@ -31,12 +36,12 @@ void Timetable::setAcademicYear(const std::string& academicYear) {
     m_academicYear = academicYear;
 }
 
-// Adds a session to the timetable if it doesn’t conflict with others
+// Adds a session to the timetable if it doesn't conflict with others
 bool Timetable::addSession(std::shared_ptr<Session> session) {
     // Check for any conflicts with existing sessions
     std::vector<std::shared_ptr<Session>> conflicts = checkForConflicts(*session);
     if (!conflicts.empty()) {
-        return false;  // Conflict found — don’t add it
+        return false;  // Conflict found — don't add it
     }
 
     // Add to both maps (by week and by ID)
@@ -100,7 +105,11 @@ std::vector<std::shared_ptr<Session>> Timetable::getSessionsForWeek(int weekNumb
 std::vector<std::shared_ptr<Session>> Timetable::getSessionsForModule(const std::string& moduleCode) const {
     std::vector<std::shared_ptr<Session>> result;
 
-    for (const auto& [id, session] : m_sessionsById) {
+    // Use traditional iterator instead of structured binding
+    for (auto it = m_sessionsById.begin(); it != m_sessionsById.end(); ++it) {
+        const std::string& id = it->first;
+        const std::shared_ptr<Session>& session = it->second;
+
         if (session->getModule().getCode() == moduleCode) {
             result.push_back(session);
         }
@@ -113,7 +122,11 @@ std::vector<std::shared_ptr<Session>> Timetable::getSessionsForModule(const std:
 std::vector<std::shared_ptr<Session>> Timetable::getSessionsForRoom(const std::string& roomNumber) const {
     std::vector<std::shared_ptr<Session>> result;
 
-    for (const auto& [id, session] : m_sessionsById) {
+    // Use traditional iterator instead of structured binding
+    for (auto it = m_sessionsById.begin(); it != m_sessionsById.end(); ++it) {
+        const std::string& id = it->first;
+        const std::shared_ptr<Session>& session = it->second;
+
         if (session->getRoom().getNumber() == roomNumber) {
             result.push_back(session);
         }
@@ -126,7 +139,11 @@ std::vector<std::shared_ptr<Session>> Timetable::getSessionsForRoom(const std::s
 std::vector<std::shared_ptr<Session>> Timetable::getSessionsForLecturer(const std::string& lecturerId) const {
     std::vector<std::shared_ptr<Session>> result;
 
-    for (const auto& [id, session] : m_sessionsById) {
+    // Use traditional iterator instead of structured binding
+    for (auto it = m_sessionsById.begin(); it != m_sessionsById.end(); ++it) {
+        const std::string& id = it->first;
+        const std::shared_ptr<Session>& session = it->second;
+
         if (session->getLecturer().getId() == lecturerId) {
             result.push_back(session);
         }
@@ -139,7 +156,11 @@ std::vector<std::shared_ptr<Session>> Timetable::getSessionsForLecturer(const st
 std::vector<std::shared_ptr<Session>> Timetable::getSessionsForGroup(const std::string& groupCode) const {
     std::vector<std::shared_ptr<Session>> result;
 
-    for (const auto& [id, session] : m_sessionsById) {
+    // Use traditional iterator instead of structured binding
+    for (auto it = m_sessionsById.begin(); it != m_sessionsById.end(); ++it) {
+        const std::string& id = it->first;
+        const std::shared_ptr<Session>& session = it->second;
+
         if (session->hasGroup(groupCode)) {
             result.push_back(session);
         }
@@ -153,7 +174,11 @@ std::vector<std::shared_ptr<Session>> Timetable::getSessionsForModuleAndGroup(
     const std::string& moduleCode, const std::string& groupCode) const {
     std::vector<std::shared_ptr<Session>> result;
 
-    for (const auto& [id, session] : m_sessionsById) {
+    // Use traditional iterator instead of structured binding
+    for (auto it = m_sessionsById.begin(); it != m_sessionsById.end(); ++it) {
+        const std::string& id = it->first;
+        const std::shared_ptr<Session>& session = it->second;
+
         if (session->getModule().getCode() == moduleCode && session->hasGroup(groupCode)) {
             result.push_back(session);
         }
@@ -167,7 +192,11 @@ std::vector<std::shared_ptr<Session>> Timetable::getSessionsForRoomAndGroup(
     const std::string& roomNumber, const std::string& groupCode) const {
     std::vector<std::shared_ptr<Session>> result;
 
-    for (const auto& [id, session] : m_sessionsById) {
+    // Use traditional iterator instead of structured binding
+    for (auto it = m_sessionsById.begin(); it != m_sessionsById.end(); ++it) {
+        const std::string& id = it->first;
+        const std::shared_ptr<Session>& session = it->second;
+
         if (session->getRoom().getNumber() == roomNumber && session->hasGroup(groupCode)) {
             result.push_back(session);
         }
@@ -181,7 +210,11 @@ std::vector<std::shared_ptr<Session>> Timetable::getSessionsForLecturerAndGroup(
     const std::string& lecturerId, const std::string& groupCode) const {
     std::vector<std::shared_ptr<Session>> result;
 
-    for (const auto& [id, session] : m_sessionsById) {
+    // Use traditional iterator instead of structured binding
+    for (auto it = m_sessionsById.begin(); it != m_sessionsById.end(); ++it) {
+        const std::string& id = it->first;
+        const std::shared_ptr<Session>& session = it->second;
+
         if (session->getLecturer().getId() == lecturerId && session->hasGroup(groupCode)) {
             result.push_back(session);
         }
@@ -246,7 +279,11 @@ std::vector<std::shared_ptr<Session>> Timetable::getAllSessions() const {
     std::vector<std::shared_ptr<Session>> allSessions;
     allSessions.reserve(m_sessionsById.size());
 
-    for (const auto& [id, session] : m_sessionsById) {
+    // Use traditional iterator instead of structured binding
+    for (auto it = m_sessionsById.begin(); it != m_sessionsById.end(); ++it) {
+        const std::string& id = it->first;
+        const std::shared_ptr<Session>& session = it->second;
+
         allSessions.push_back(session);
     }
 
