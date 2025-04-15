@@ -16,6 +16,7 @@
 #include "Session.h"
 #include "Timetable.h"
 #include "User.h"
+#include "Admin.h"  // Added Admin include
 #include "FileManager.h"
 #include "TimeSlot.h"
 #include <algorithm>
@@ -54,6 +55,7 @@ void TimetableManager::initialize(const std::string& academicYear) {
     m_rooms.clear();
     m_students.clear();
     m_lecturers.clear();
+    m_admins.clear();  // Clear admins
 
     m_moduleMap.clear();
     m_groupMap.clear();
@@ -62,6 +64,7 @@ void TimetableManager::initialize(const std::string& academicYear) {
     m_studentMap.clear();
     m_studentUsernameMap.clear();
     m_lecturerMap.clear();
+    m_adminMap.clear();  // Clear admin map
     m_userMap.clear();
 
     // Create a new timetable
@@ -529,6 +532,31 @@ bool TimetableManager::assignLecturerToModule(const std::string& lecturerId, con
     module->addLecturer(lecturer);
 
     return true;
+}
+
+// Admin management methods
+void TimetableManager::addAdmin(std::shared_ptr<Admin> admin) {
+    // Add admin to vectors and maps
+    if (!admin) {
+        throw std::invalid_argument("Admin pointer is null");
+    }
+
+    // Check if the username already exists in the user map
+    if (m_userMap.find(admin->getUsername()) != m_userMap.end()) {
+        throw std::invalid_argument("User with username " + admin->getUsername() + " already exists");
+    }
+
+    m_admins.push_back(admin);
+    m_adminMap[admin->getUsername()] = admin;
+    m_userMap[admin->getUsername()] = admin;
+}
+
+std::shared_ptr<Admin> TimetableManager::getAdminByUsername(const std::string& username) const {
+    auto it = m_adminMap.find(username);
+    if (it != m_adminMap.end()) {
+        return it->second;
+    }
+    return nullptr;
 }
 
 // Session management

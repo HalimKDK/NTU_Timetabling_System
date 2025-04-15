@@ -24,7 +24,7 @@
 #include <limits>
 #include <algorithm>
 
- // Constructor
+  // Constructor
 Admin::Admin(const std::string& username, const std::string& password)
     : User(username, password, User::UserType::ADMIN) {
     // Any additional initialization code
@@ -76,27 +76,153 @@ void Admin::displayMainMenu() const {
 // Process the main menu choice
 bool Admin::processMenuChoice(int choice) {
     switch (choice) {
-    case 1:
-        displayModuleMenu();
+    case 1: {
+        // Module menu
+        int moduleChoice;
+        bool continueModuleMenu = true;
+
+        while (continueModuleMenu) {
+            displayModuleMenu();
+            std::cin >> moduleChoice;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+            if (std::cin.fail()) {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Invalid input. Please enter a number." << std::endl;
+                continue;
+            }
+
+            continueModuleMenu = processModuleMenuChoice(moduleChoice);
+        }
         return true;
-    case 2:
-        displayGroupMenu();
+    }
+    case 2: {
+        // Group menu
+        int groupChoice;
+        bool continueGroupMenu = true;
+
+        while (continueGroupMenu) {
+            displayGroupMenu();
+            std::cin >> groupChoice;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+            if (std::cin.fail()) {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Invalid input. Please enter a number." << std::endl;
+                continue;
+            }
+
+            continueGroupMenu = processGroupMenuChoice(groupChoice);
+        }
         return true;
-    case 3:
-        displaySessionTypeMenu();
+    }
+    case 3: {
+        // Session Type menu
+        int sessionTypeChoice;
+        bool continueSessionTypeMenu = true;
+
+        while (continueSessionTypeMenu) {
+            displaySessionTypeMenu();
+            std::cin >> sessionTypeChoice;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+            if (std::cin.fail()) {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Invalid input. Please enter a number." << std::endl;
+                continue;
+            }
+
+            continueSessionTypeMenu = processSessionTypeMenuChoice(sessionTypeChoice);
+        }
         return true;
-    case 4:
-        displayStudentMenu();
+    }
+    case 4: {
+        // Student menu
+        int studentChoice;
+        bool continueStudentMenu = true;
+
+        while (continueStudentMenu) {
+            displayStudentMenu();
+            std::cin >> studentChoice;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+            if (std::cin.fail()) {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Invalid input. Please enter a number." << std::endl;
+                continue;
+            }
+
+            continueStudentMenu = processStudentMenuChoice(studentChoice);
+        }
         return true;
-    case 5:
-        displayLecturerMenu();
+    }
+    case 5: {
+        // Lecturer menu
+        int lecturerChoice;
+        bool continueLecturerMenu = true;
+
+        while (continueLecturerMenu) {
+            displayLecturerMenu();
+            std::cin >> lecturerChoice;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+            if (std::cin.fail()) {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Invalid input. Please enter a number." << std::endl;
+                continue;
+            }
+
+            continueLecturerMenu = processLecturerMenuChoice(lecturerChoice);
+        }
         return true;
-    case 6:
-        displayRoomMenu();
+    }
+    case 6: {
+        // Room menu
+        int roomChoice;
+        bool continueRoomMenu = true;
+
+        while (continueRoomMenu) {
+            displayRoomMenu();
+            std::cin >> roomChoice;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+            if (std::cin.fail()) {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Invalid input. Please enter a number." << std::endl;
+                continue;
+            }
+
+            continueRoomMenu = processRoomMenuChoice(roomChoice);
+        }
         return true;
-    case 7:
-        displayTimetableMenu();
+    }
+    case 7: {
+        // Timetable menu
+        int timetableChoice;
+        bool continueTimetableMenu = true;
+
+        while (continueTimetableMenu) {
+            displayTimetableMenu();
+            std::cin >> timetableChoice;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+            if (std::cin.fail()) {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Invalid input. Please enter a number." << std::endl;
+                continue;
+            }
+
+            continueTimetableMenu = processTimetableMenuChoice(timetableChoice);
+        }
         return true;
+    }
     case 0:
         std::cout << "Logging out..." << std::endl;
         return false;
@@ -526,7 +652,7 @@ void Admin::registerStudent() {
     std::getline(std::cin, password);
 
     try {
-        auto student = std::make_shared<Student>(studentId, firstName, lastName, username, password);
+        auto student = std::make_shared<Student>(username, password, firstName, lastName, studentId);
         TimetableManager& manager = TimetableManager::getInstance();
         manager.addStudent(student);
         std::cout << "Student registered successfully!" << std::endl;
@@ -641,7 +767,7 @@ void Admin::registerLecturer() {
     std::getline(std::cin, password);
 
     try {
-        auto lecturer = std::make_shared<Lecturer>(id, firstName, lastName, title, department, username, password);
+        auto lecturer = std::make_shared<Lecturer>(firstName, lastName, id, title, department, username, password);
         TimetableManager& manager = TimetableManager::getInstance();
         manager.addLecturer(lecturer);
         std::cout << "Lecturer registered successfully!" << std::endl;

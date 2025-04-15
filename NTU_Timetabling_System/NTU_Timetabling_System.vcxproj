@@ -127,7 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="NTU_Timetabling_System.cpp" />
+    <ClCompile Include="SRC\NTU_Timetabling_System.cpp" />
     <ClCompile Include="SRC\Admin.cpp" />
     <ClCompile Include="SRC\CSV_Exporter.cpp" />
     <ClCompile Include="SRC\FileManager.cpp" />

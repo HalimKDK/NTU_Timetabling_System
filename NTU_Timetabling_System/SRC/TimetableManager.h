@@ -24,6 +24,7 @@ class Lecturer;
 class Session;
 class Timetable;
 class User;
+class Admin;  // Added forward declaration for Admin
 class TimeSlot;
 
 // Main manager for the timetabling system, designed as a singleton
@@ -97,6 +98,10 @@ public:
     bool lecturerExists(const std::string& lecturerId) const;
     bool assignLecturerToModule(const std::string& lecturerId, const std::string& moduleCode);
 
+    // Admin management
+    void addAdmin(std::shared_ptr<Admin> admin);
+    std::shared_ptr<Admin> getAdminByUsername(const std::string& username) const;
+
     // Session management
     std::shared_ptr<Session> createSession(
         const std::string& moduleCode,
@@ -136,6 +141,7 @@ private:
     std::vector<Room> m_rooms;
     std::vector<std::shared_ptr<Student>> m_students;
     std::vector<std::shared_ptr<Lecturer>> m_lecturers;
+    std::vector<std::shared_ptr<Admin>> m_admins;  // Added vector for Admin users
 
     std::unique_ptr<Timetable> m_timetable;
 
@@ -148,6 +154,7 @@ private:
     std::map<std::string, std::shared_ptr<Student>> m_studentMap;
     std::map<std::string, std::shared_ptr<Student>> m_studentUsernameMap;
     std::map<std::string, std::shared_ptr<Lecturer>> m_lecturerMap;
+    std::map<std::string, std::shared_ptr<Admin>> m_adminMap;  // Added map for Admin users
     std::map<std::string, std::shared_ptr<User>> m_userMap;
 };
 
