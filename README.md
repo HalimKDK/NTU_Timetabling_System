@@ -174,4 +174,4 @@ See the `TESTS` folder for the test plan, unit tests and user acceptance test ca
 
 ## Author
 
-**Name:** [Halim Kadiku]
+**Name:** Halim Kadiku
